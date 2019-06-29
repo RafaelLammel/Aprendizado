@@ -3,64 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Decidi deixar o HTML e CSS no mesmo arquivo -->
-  <style>
-    body{
-      font-family: Arial;
-      background: linear-gradient(to top left, #006600 26%, #0066ff 89%);
-    }
-    h3{
-      text-align: center;
-    }
-    input{
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #DDD;
-      border-radius: 5px;
-      font-family: sans-serif;
-      font-size: 100%;
-    }
-    button{
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #DDD;
-      border-radius: 5px;
-      font-family: sans-serif;
-      font-size: 100%;
-      background-color: darkgreen;
-      color:white;
-    }
-    textarea{
-      height: 150px;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #DDD;
-      border-radius: 5px;
-      font-family: sans-serif;
-      font-size: 100%;
-    }
-    .content{
-      display: flex;
-      justify-content: center;
-    }
-    .container{
-      width: 100%;
-      max-width: 500px;
-      background-color: rgba(255,255,255,0.8);
-      padding: 15px;
-      border-radius: 5px;
-    }
-    .form{
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
-  <title>Cadastro</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+  <title>Cadastro de Pedidos</title>
 </head>
 <body>
+  <div class = "menu">
+    <ul>
+      <li><a href="index.html">CADASTRAR PEDIDO</a></li>
+      <li><a href="pedidosCadastrados.php">VER PEDIDOS CADASTRADOS</a></li>
+    </ul>
+  </div>
   <section class="content">
     <div class="container">
-      <form onsubmit="return validacao()" class="form" method="POST" action="models/pedidoModel.php">
+      <form onsubmit="return validacao()" class="form" method="POST" action="controller/cadastroPedido.php">
         <h3>DADOS PARA ENTREGA</h3>
         Nome:<input type="text" id="nome" name="nome">
         Endereço: <input type="text" name="endereco">
