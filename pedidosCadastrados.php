@@ -13,7 +13,7 @@
   ?>
   <div class = "menu">
     <ul>
-      <li><a href="index.html">CADASTRAR PEDIDO</a></li>
+      <li><a href="index.php">CADASTRAR PEDIDO</a></li>
       <li><a href="pedidosCadastrados.php">VER PEDIDOS CADASTRADOS</a></li>
     </ul>
   </div>
@@ -24,6 +24,7 @@
           <th>ID</th>
           <th>Nome</th>
           <th>Telefone</th>
+          <th>Editar</th>
         </tr>
         <?php
           while ($row = $result->fetch_assoc()):
@@ -32,6 +33,9 @@
           <td><?php echo $row['id'];?></td>
           <td><?php echo $row['nome'];?></td>
           <td><?php echo $row['telefone'];?></td>
+          <td>
+            <a href="index.php?edit=<?php echo $row['id']; ?>">Editar</a>
+          </td>
         </tr>
         <?php endwhile; ?>
       </table>
