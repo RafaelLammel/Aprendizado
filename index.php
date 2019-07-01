@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<?php  ?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,27 +34,27 @@
         <h3>DADOS PARA A PRODUÇÃO</h3>
         <div>
           Tipo Revistinha:
-          <input type="radio" name="revistinha" value="Convite" checked=<?php
-                                                                        if(isset($p)){
-                                                                          if($p->getRevistinha() == "Convite")
-                                                                            echo "true";
-                                                                          else
-                                                                            echo "false";
-                                                                        }?>>Convite
-          <input type="radio" name="revistinha" value="Lembrança"checked=<?php
-                                                                        if(isset($p)){
-                                                                          if($p->getRevistinha() == "Lembrança")
-                                                                            echo "true";
-                                                                          else
-                                                                            echo "false";
-                                                                        }?>>Lembrança
-          <input type="radio" name="revistinha" value="Convite-Lembrança" checked=<?php
-                                                                        if(isset($p)){
-                                                                          if($p->getRevistinha() == "Convite-Lembrança")
-                                                                            echo "true";
-                                                                          else
-                                                                            echo "false";
-                                                                        }?>>Convite-Lembrança
+          <input type="radio" name="revistinha" value="Convite" <?php
+                                                                $x = "";
+                                                                if(isset($p))
+                                                                  if($p->getRevistinha() == "Convite")
+                                                                    $x = "checked";
+                                                                echo $x;
+                                                                ?>>Convite
+          <input type="radio" name="revistinha" value="Lembrança" <?php
+                                                                  $x = "";
+                                                                  if(isset($p))
+                                                                    if($p->getRevistinha() == "Lembrança")
+                                                                      $x = "checked";
+                                                                  echo $x;
+                                                                  ?>>Lembrança
+          <input type="radio" name="revistinha" value="Convite-Lembrança" <?php
+                                                                          $x = "";
+                                                                          if(isset($p))
+                                                                            if($p->getRevistinha() == "Convite-Lembrança")
+                                                                              $x = "checked";
+                                                                          echo $x;
+                                                                          ?>>Convite-Lembrança
         </div>
         <br>
         <div>
@@ -64,13 +63,13 @@
         Atrações do evento:
         <textarea name="atracoes" style="resize:none;"><?php if(isset($p)){echo $p->getAtracoes();} ?></textarea>
         <div style="display: flex; justify-content: center; font-size:70%">
-        <input type="checkbox" name="sugestao" checked=<?php
-                                                        if(isset($p)){
-                                                          if($p->getSugestao() == true)
-                                                            echo "true";
-                                                          else
-                                                            echo "false";
-                                                        }?>>
+        <input type="checkbox" name="sugestao" <?php
+                                                $x = "";
+                                                if(isset($p))
+                                                  if($p->getSugestao() == true)
+                                                    $x = "checked";
+                                                echo $x;
+                                                ?>>
         Aceito sugestões de texto para a capa
         </div>
         <br>

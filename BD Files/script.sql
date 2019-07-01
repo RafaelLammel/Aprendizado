@@ -11,7 +11,7 @@ CREATE TABLE pedido(
   UF VARCHAR(2),
   email VARCHAR(45),
   telefone VARCHAR(15),
-  revistinha VARCHAR(17),
+  revistinha VARCHAR(20),
   quantidade INT,
   atracoes VARCHAR(500),
   sugestao BOOLEAN,

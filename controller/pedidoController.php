@@ -56,11 +56,20 @@ if(isset($_POST['cadastrar'])){
   '{$p->getRevistinha()}','{$p->getQuantidade()}','{$p->getAtracoes()}',
   '{$p->getSugestao()}','{$p->getImagem()}')");
 
-  unset($p);
-
   $_SESSION['message'] = "Cadastro realizado com sucesso!";
 
-  header("location: ../index.php");
+  $to = "rafaellmarinheiro42@gmail.com, ".$p->getEmail();
+  $subject = "Confirmação de Pedido";
+  $message = "Seu pedido foi cadastrado e confirmado.";
+  if(mail($to,$subject,$message))
+    echo "IT WORKED";
+  else {
+    echo "IT DIDNT";
+  }
+
+  unset($p);
+
+  //header("location: ../index.php");
 
 }
 
