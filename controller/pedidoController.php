@@ -8,7 +8,9 @@ require_once realpath(dirname(__FILE__).'/..').'/bd.php';
 /*Pegando a classe Pedido*/
 require realpath(dirname(__FILE__).'/..')."/classes/pedido.php";
 
+/*Se for TRUE, muda alguns valores de texto da página de cadastro*/
 $editar = false;
+/*Armazena o ID que requisitou alteração no cadastro*/
 $id = 0;
 
 /*Checando se o usuário veio do botão de cadastro para fazer a inserção*/
@@ -58,25 +60,35 @@ if(isset($_POST['cadastrar'])){
 
   $_SESSION['message'] = "Cadastro realizado com sucesso!";
 
+  /*Essa função foi testada pelo XAMPP, alterando algumas configurações,
+  seguindo este guia: https://stackoverflow.com/questions/15965376/how-to-configure-xampp-to-send-mail-from-localhost*/
   $to = "rafaellmarinheiro42@gmail.com, ".$p->getEmail();
   $subject = "Confirmação de Pedido";
   $message = "Seu pedido foi cadastrado e confirmado.";
   if(mail($to,$subject,$message))
-    echo "IT WORKED";
+    echo "Email enviado com sucesso.";
   else {
-    echo "IT DIDNT";
+    echo "Falha ao enviar email de confirmação.";
   }
 
+  /*Liberando a variavel $p e voltando para a tela inicial de cadastro*/
   unset($p);
+  header("location: ../index.php");
 
-  //header("location: ../index.php");
+  /*Fechando a conexão com o banco de dados*/
+  mysqli_close($conn);
 
 }
 
-/*Verificando se o usuário está vindo a partir do botão editar*/
+/*Verificando se o usuário está vindo a partir do botão editar da pagina
+Pedidos Cadastrados*/
 if(isset($_GET['edit'])){
+
+  /*Pegando o ID de quem pediu alteração*/
   $id = $_GET['edit'];
   $editar = true;
+
+  /*SELECT busca o cadastro no banco de dados baseado no ID*/
   $result = $conn->query("SELECT * FROM pedido WHERE ID = $id") or die($conn->error());
   if($result!=NULL){
     $row = $result->fetch_array();
@@ -95,8 +107,12 @@ if(isset($_GET['edit'])){
                     $row['imagem']);
   }
 
+  /*Fechando a conexão com o banco de dados*/
+  mysqli_close($conn);
+
 }
 
+/*Função para gravar as alterações no banco de dados*/
 if(isset($_POST['update'])){
   $id = $_POST['id'];
 
@@ -130,15 +146,28 @@ if(isset($_POST['update'])){
                   $sugestao,
                   $_POST['imagens']);
 
+  /*Query para a alteração do cadastro no banco de dados*/
   $conn->query("UPDATE pedido SET nome = '{$p->getNome()}', endereco = '{$p->getEndereco()}',
   bairro = '{$p->getBairro()}',CEP = '{$p->getCEP()}',cidade = '{$p->getCidade()}',UF = '{$p->getUF()}',
   email = '{$p->getEmail()}', telefone = '{$p->getTelefone()}',revistinha = '{$p->getRevistinha()}',
   quantidade = '{$p->getQuantidade()}',atracoes = '{$p->getAtracoes()}',sugestao = '{$p->getSugestao()}',
   imagem = '{$p->getImagem()}' WHERE ID = '$id'");
+
   $_SESSION['message'] = "Alterações feitas com sucesso!";
   header('location: ../index.php');
 }
 
-mysqli_close($conn);
+/*Checa se o pedido veio de deletar*/
+if(isset($_GET['delete'])){
+
+  /*Pegando o ID passado por parametro*/
+  $id = $_GET['delete'];
+
+  /*Query para o banco de dados deletar o pedido pelo ID*/
+  $conn->query("DELETE FROM pedido WHERE ID = '$id'");
+
+  $_SESSION['message'] = "Pedido deletado com sucesso!";
+
+}
 
 ?>

@@ -22,7 +22,8 @@
         <h3>DADOS PARA ENTREGA</h3>
         <input type="hidden" name="id" value=<?php echo $id; ?>>
         Nome:<input type="text" id="nome" name="nome" value="<?php if(isset($p)){echo $p->getNome();} ?>">
-        Endereço: <input type="text" name="endereco" value="<?php if(isset($p)){echo $p->getEndereco();} ?>">
+        Endereço: <input type="text" name="endereco" placeholder="Ex.: Rua Teste, 21"
+        value="<?php if(isset($p)){echo $p->getEndereco();} ?>">
         Bairro: <input type="text" name="bairro" value="<?php if(isset($p)){echo $p->getBairro();} ?>">
         CEP: <input type="text" id="CEP" name="CEP" maxlength="8" value="<?php if(isset($p)){echo $p->getCEP();} ?>">
         Cidade: <input type="text" name="cidade" value="<?php if(isset($p)){echo $p->getCidade();} ?>">
@@ -88,8 +89,9 @@
   <div id="snackbar"><?php echo $_SESSION['message'];?></div>
   <script>
     function myFunction() {
-      /*Código abaixo veio da W3Schools:
-      https://www.w3schools.com/howto/howto_js_snackbar.asp*/
+      /*Código abaixo pra fazer a mensagem de confirmação da tela aparecer e sumir,
+      veio da W3Schools: https://www.w3schools.com/howto/howto_js_snackbar.asp*/
+
       // Get the snackbar DIV
       var x = document.getElementById("snackbar");
 

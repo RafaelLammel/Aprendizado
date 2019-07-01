@@ -1,5 +1,7 @@
 <?php
+
 /*Conectando ao BD*/
+
 /* Variaveis para a conexão com o BD*/
 $host = "localhost";
 $user = "root";
