@@ -62,7 +62,7 @@ if(isset($_POST['cadastrar'])){
 
   /*Essa função foi testada pelo XAMPP, alterando algumas configurações,
   seguindo este guia: https://stackoverflow.com/questions/15965376/how-to-configure-xampp-to-send-mail-from-localhost*/
-  $to = "rafaellmarinheiro42@gmail.com, ".$p->getEmail();
+  $to = $p->getEmail().", davi@signoweb.com.br";
   $subject = "Confirmação de Pedido";
   $message = "Seu pedido foi cadastrado e confirmado.";
   if(mail($to,$subject,$message))
