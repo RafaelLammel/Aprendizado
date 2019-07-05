@@ -41,6 +41,11 @@
         </tr>
         <?php endwhile; ?>
       </table>
+      <form class="form" method="POST" action="controller/pedidoController.php">
+        <div style="margin-bottom: 0px; text-align:center; margin-top:20px">
+          <button type="submit" name="export" value="export">Exportar dados</button>
+        </div>
+      </form>
     </div>
   </section>
   <div id="snackbar"><?php echo $_SESSION['message'];?></div>

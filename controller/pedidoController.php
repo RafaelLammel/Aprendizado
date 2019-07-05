@@ -170,4 +170,22 @@ if(isset($_GET['delete'])){
 
 }
 
+if (isset($_POST["export"])) {
+  $productResult = $conn->query("SELECT * FROM pedido");
+    $filename = "Export_excel.xls";
+    header("Content-Type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=\"$filename\"");
+    $isPrintHeader = false;
+    if (! empty($productResult)) {
+        foreach ($productResult as $row) {
+            if (! $isPrintHeader) {
+                echo implode("\t", array_keys($row)) . "\n";
+                $isPrintHeader = true;
+            }
+            echo implode("\t", array_values($row)) . "\n";
+        }
+    }
+    exit();
+}
+
 ?>
