@@ -12,4 +12,7 @@ fetch('https://api.myjson.com/bins/oi83g').then( response => {
 }).catch( err => {
   console.log("Erro ao buscar dados =( ", err)
   //Tratar Erro
+}).finally(() => {
+  let spinner = document.querySelector(".lds-ring")
+  spinner.classList.add('invisivel');
 })

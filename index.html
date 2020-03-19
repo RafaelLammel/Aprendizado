@@ -2,22 +2,34 @@
 <html>
   <head>
     <title>Livros Deal</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css"/>
   </head>
   <body>
-    <table>
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Nome</th>
-          <th>Preço</th>
-          <th>Paginas</th>
-          <th>Categoria</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-livros">
-      </tbody>
-    </table>
+    <main>
+      <div class="container">
+        <div class="pesquisa-box">
+          <input type="text" id="pesquisa-tabela"/>
+          <button class="pesquisa-btn">Pesquisar</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Preço</th>
+              <th>Paginas</th>
+              <th>Categoria</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-livros">
+          </tbody>
+        </table>
+        <div class="loading-spinner">
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </main>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/api.js"></script>
   </body>
