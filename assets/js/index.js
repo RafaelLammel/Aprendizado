@@ -1,6 +1,7 @@
+var tabela = document.querySelector("#tabela-livros");
+
 function adicionaLivro(livro) {
   let tr = adicionaTr(livro)
-  var tabela = document.querySelector("#tabela-livros");
   tabela.appendChild(tr)
 }
 
@@ -27,3 +28,23 @@ function adicionaTr(livro) {
 
   return novaTr;
 }
+
+/*JS para pesquisa*/
+
+var inputPesquisa = document.querySelector("#pesquisa-tabela");
+
+inputPesquisa.addEventListener("keyup", () => {
+  let filtro = inputPesquisa.value.toUpperCase();
+  let tr = tabela.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    let td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filtro) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+})
