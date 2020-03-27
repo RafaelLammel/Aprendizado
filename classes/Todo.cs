@@ -32,11 +32,12 @@ namespace TodoApp.Classes
             Console.WriteLine("#####                             #####");
             Console.WriteLine("#######################################");
             Console.WriteLine("#######################################");
-            Console.WriteLine("Rscolha a Opção: ");
+            
            //------------------------------------------------------------------------------  
            // Laço de repetição:
             while(menu != "0")
             {
+                Console.Write("Escolha a Opção: ");
                 menu = Console.ReadLine();
             
                 //------------------------------------------------------------------------------  
@@ -50,21 +51,24 @@ namespace TodoApp.Classes
                         Console.Write("Insira o texto da tarefa: ");
                         var tarefa = Console.ReadLine();
                         Adicionar(tarefa);
-                        Console.WriteLine("Tarefa adicionada com sucesso!");
+                        Console.WriteLine();
+                        Console.WriteLine("Resposta: Tarefa adicionada com sucesso!");
+                        Console.WriteLine();
                         break;
                     case "2":
                         Consultar();
                         break;
-
                     case "3":
                         Console.Write("Insira o ID da tarefa: ");
                         var id = Console.ReadLine();
                         Concluir(Int32.Parse(id));
-                        Console.WriteLine("Tarefa Concluída com sucesso!");
-                        //Concluir();
+                        Console.WriteLine();
+                        Console.WriteLine("Resposta: Tarefa Concluída com sucesso!");
+                        Console.WriteLine();
                         break;
                     default:
-                        Console.WriteLine("Você saiu do programa! Tente novamente!");
+                        Console.WriteLine();
+                        Console.WriteLine("Você saiu do programa!");
                         break;
                 }
             }
@@ -91,15 +95,17 @@ namespace TodoApp.Classes
         {
             if(lista.Count > 0)
             {
+                Console.WriteLine();
                 foreach(var task in lista)
                 {
                     string status = task.Concluido ? "Concluído" : "Não concluído";
-                    Console.WriteLine($"{task.Id} - {task.Texto} --> {status}");
+                    Console.WriteLine(" {0} - {1} | Status: {2}", task.Id, task.Texto.PadRight(25), status);
+                    Console.WriteLine();
                 }   
             }
             else 
             {
-                Console.WriteLine("Não há tarefas registradas!");
+                Console.WriteLine("Não há tarefas Agendadas!");
             }
         }
         
