@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Text.Json;
 using TodoApp.Models;
 
 namespace TodoApp.Classes
@@ -11,13 +13,16 @@ namespace TodoApp.Classes
         // Variáveis:
         private List<TodoTask> lista;
         private int idIncrement;
+        private string dataPath = "data/data.json";
 
         // Método com a entrada de dados e a lista: 
         public Todo()
         {
+            string json = File.ReadAllText(dataPath);
+            
+            lista = JsonSerializer.Deserialize<List<TodoTask>>(json);
 
-            lista = new List<TodoTask>();
-            idIncrement = 1;
+            idIncrement = lista.Count > 0 ? lista.Max(x => x.Id)+1 : 1;
 
             string menu = "-1";
 
@@ -28,6 +33,7 @@ namespace TodoApp.Classes
             Console.WriteLine("#####        [1] - [Adicionar]    #####");
             Console.WriteLine("#####        [2] - [Consultar]    #####");
             Console.WriteLine("#####        [3] - [Concluir]     #####");
+            Console.WriteLine("#####        [4] - [Deletar]      #####");
             Console.WriteLine("#####        [0] - [Sair]         #####");
             Console.WriteLine("#####                             #####");
             Console.WriteLine("#######################################");
@@ -63,7 +69,11 @@ namespace TodoApp.Classes
                         var id = Console.ReadLine();
                         Concluir(Int32.Parse(id));
                         Console.WriteLine();
-                        Console.WriteLine("Resposta: Tarefa Concluída com sucesso!");
+                        break;
+                    case "4":
+                        Console.Write("Insira o ID da tarefa: ");
+                        var idDelete = Console.ReadLine();
+                        DeletarTarefa(Int32.Parse(idDelete));
                         Console.WriteLine();
                         break;
                     default:
@@ -86,6 +96,8 @@ namespace TodoApp.Classes
             });
 
             idIncrement++;
+
+            SalvarDados();
         }
 
         //------------------------------------------------------------------------------
@@ -114,9 +126,44 @@ namespace TodoApp.Classes
 
         public void Concluir(int id)
         {
-            lista.Where(x => x.Id == id).ToList().ForEach(x => x.Concluido = true);
+            try
+            {
+                var task = lista.Where(x => x.Id == id).First();
+                if(!task.Concluido)
+                {
+                    task.Concluido = true;
+                    SalvarDados();
+                    Console.WriteLine("\nResposta: Tarefa Concluída com sucesso!");
+                }
+                else
+                    Console.WriteLine("\nEssa tarefa já foi concluida!");
+            }
+            catch
+            {
+                Console.WriteLine("\nEsse ID não pertence a nenhuma tarefa!");
+            }
         }
 
+        public void DeletarTarefa(int id)
+        {
+            try
+            {
+                var task = lista.Where(x => x.Id == id).First();
+                lista.Remove(task);
+                SalvarDados();
+                Console.WriteLine("\nTarefa excluída com sucesso!");
+            }
+            catch
+            {
+                Console.WriteLine("\nEsse ID não pertence a nenhuma tarefa!");
+            }
+        }
+
+        public void SalvarDados()
+        {
+            string json = JsonSerializer.Serialize(lista);
+            File.WriteAllText(dataPath, json);
+        }
     }
 
 }
