@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TodoAspNET.Models;
 
 namespace TodoAspNET.Data
 {
@@ -12,5 +13,9 @@ namespace TodoAspNET.Data
             : base(options)
         {
         }
+
+        public DbSet<Lista> Listas { get; set; }
+        public DbSet<Tarefa> Tarefas { get; set; }
+
     }
 }
