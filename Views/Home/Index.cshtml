@@ -2,7 +2,23 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section CSS
+{
+    <link rel="stylesheet" href="~/css/todo.css" />
+}
+
+    
+
+<div id= "container">
+	<h1>To-Do Lists <span id="toggle-form"><i class="fas fa-plus"></i></span></h1>
+	<input type="text"maxlength="25" placeholder="Digite aqui">
+
+	<ul>
+		<li><span><i class="fas fa-trash"></i></span> Jogar Manicraft</li>
+		<li><span><i class="fas fa-trash"></i></span> Jogar lolzinho</li>
+		<li><span><i class="fas fa-trash"></i></span> Estudar pra ser igual o Rafael</li>
+        <li><span><i class="fas fa-trash"></i></span> Estudar pra ser igual o Gabriel</li>
+        <li><span><i class="fas fa-trash"></i></span> Estudar pra ser igual o Gustavo</li>
+	</ul>
 </div>
+
