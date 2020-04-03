@@ -48,8 +48,36 @@ namespace TodoAspNET.Controllers
                 Tarefas = tarefas
             };
 
-            return  View(listaTarefas);            
+            return View(listaTarefas);            
 
+        }
+        
+        public IActionResult CompletaTarefa(int IdTarefa)
+        {
+            var tarefa = _context.Tarefas.Where(x => x.Id == IdTarefa).First();
+            tarefa.Status = !tarefa.Status;
+            _context.SaveChanges();
+
+            var tarefas = _context.Tarefas.ToList();
+            var listaTarefas = new IndexViewModel(){
+                Tarefas = tarefas
+            };
+
+            return View("Index", listaTarefas);
+        }
+
+        public IActionResult DeletaTarefa(int IdTarefa)
+        {
+            var tarefa = _context.Tarefas.Where(x => x.Id == IdTarefa).First();
+            _context.Tarefas.Remove(tarefa);
+            _context.SaveChanges();
+
+            var tarefas = _context.Tarefas.ToList();
+            var listaTarefas = new IndexViewModel(){
+                Tarefas = tarefas
+            };
+
+            return View("Index", listaTarefas);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
