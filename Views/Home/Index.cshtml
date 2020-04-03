@@ -8,26 +8,33 @@
     <link rel="stylesheet" href="~/css/todo.css" />
 }
 
+<a href="#" class="btn btn-success btn-custom posicaoButton">
+<span class="fas fa-plus img-circle text-primary btn-icon"></span>
+
+</a>
+
 <div id= "container">
-	<h1>To-Do Lists <span id="toggle-form"><i class="fas fa-plus"></i></span></h1>
-	
-	<form asp-action="Index" method="POST">
-		<input asp-for="TarefaToSend.Descricao" maxlength="25" placeholder="Digite aqui" />
-	</form>
-	
-	<ul>
-		@foreach (var item in Model.Tarefas)
-		{
-			<li>
-				<a asp-action="DeletaTarefa" asp-route-idtarefa="@item.Id">
-					<span><i class="fas fa-trash"></i></span>
-				</a>
-				@item.Descricao
-				<a asp-action="CompletaTarefa" asp-route-idtarefa="@item.Id">
-					<i class="fas fa-check check @(item.Status == true ? "checked" : "")"></i>
-				</a>
+
+	<div class="accordion" id="accordionExample">
+
+		<h1>To-Do Lists <span id="toggle-form"><a class="toggle-list" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"></i></a></span></h1>
+		
+		<ul class="collapse show" id="collapseExample">
+			<li class="remove-li-style">
+				<input id="descricao-tarefa" maxlength="25" placeholder="Digite aqui" onkeydown="createTask(event)"/>
 			</li>
-		}
-	</ul>
+			@foreach (var item in Model.Tarefas)
+			{
+				<li id="tarefa-@(item.Id)">
+					<span><i class="fas fa-trash trash" onclick="deleteTask(@item.Id)"></i></span>
+					@item.Descricao
+					<i id="tarefa-checked-@(item.Id)" class="fas fa-check check @(item.Status == true ? "checked" : "")" onclick="changeStatus(@item.Id)"></i>
+				</li>
+			}
+		</ul>
+	</div>
 </div>
 
+@section Scripts {
+	<script src="~/js/home.js"></script>
+}

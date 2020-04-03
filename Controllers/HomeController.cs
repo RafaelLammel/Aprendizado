@@ -34,36 +34,24 @@ namespace TodoAspNET.Controllers
         }
         
         [HttpPost]
-        public IActionResult Index(IndexViewModel tarefa)
+        public IActionResult Index(Tarefa tarefa)
         {
-            tarefa.TarefaToSend.Status = false;
-
-            _context.Tarefas.Add(tarefa.TarefaToSend);
-           
+            tarefa.Status = false;
+            _context.Tarefas.Add(tarefa);
             _context.SaveChanges();
-            
-            var tarefas = _context.Tarefas.ToList();
-            
-            var listaTarefas = new IndexViewModel(){
-                Tarefas = tarefas
-            };
 
-            return View(listaTarefas);            
+            return Ok(tarefa);            
 
         }
         
+
         public IActionResult CompletaTarefa(int IdTarefa)
         {
             var tarefa = _context.Tarefas.Where(x => x.Id == IdTarefa).First();
             tarefa.Status = !tarefa.Status;
             _context.SaveChanges();
 
-            var tarefas = _context.Tarefas.ToList();
-            var listaTarefas = new IndexViewModel(){
-                Tarefas = tarefas
-            };
-
-            return View("Index", listaTarefas);
+            return Ok(new {id=IdTarefa});
         }
 
         public IActionResult DeletaTarefa(int IdTarefa)
@@ -72,12 +60,7 @@ namespace TodoAspNET.Controllers
             _context.Tarefas.Remove(tarefa);
             _context.SaveChanges();
 
-            var tarefas = _context.Tarefas.ToList();
-            var listaTarefas = new IndexViewModel(){
-                Tarefas = tarefas
-            };
-
-            return View("Index", listaTarefas);
+            return Ok(new {id=IdTarefa});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

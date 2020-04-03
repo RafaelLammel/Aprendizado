@@ -7,5 +7,6 @@ namespace TodoAspNET.ViewModels
     {
         public List<Tarefa> Tarefas { get; set; }
         public Tarefa TarefaToSend { get; set; }
+
     }
 }

@@ -1,14 +1,14 @@
 body {
     font-family: Roboto;
-    background: -webkit-linear-gradient(90deg, #006400 10%, #EAECC6 90%);
+    background: -webkit-linear-gradient(90deg, #90EE90 10%, #EAECC6 90%);
     /* Chrome 10+, Saf5.1+ */
-    background: -moz-linear-gradient(90deg, #006400 10%, #EAECC6 90%);
+    background: -moz-linear-gradient(90deg, #90EE90 10%, #EAECC6 90%);
     /* FF3.6+ */
-    background: -ms-linear-gradient(90deg, #006400 10%, #EAECC6 90%);
+    background: -ms-linear-gradient(90deg, #90EE90 10%, #EAECC6 90%);
     /* IE10 */
-    background: -o-linear-gradient(90deg, #006400 10%, #EAECC6 90%);
+    background: -o-linear-gradient(90deg, #90EE90 10%, #EAECC6 90%);
     /* Opera 11.10+ */
-    background: linear-gradient(90deg, #006400 10%, #EAECC6 90%);
+    background: linear-gradient(90deg, #90EE90 10%, #EAECC6 90%);
     /* W3C */
 }
 
@@ -19,34 +19,13 @@ ul {
 }
 
 h1 {
-    background: #006400;
+    background: #27a844;
     color: white;
     margin: 0;
     padding: 10px 20px;
     text-transform: uppercase;
     font-size: 24px;
     font-weight: normal;
-}
-
-
-/*posição do botão adicionar*/
-#toggle-form{
-	float: right;
-}
-
-.check {
-	float: right;
-	background-color:#C0C0C0;
-	width: 40px;
-	height: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: white;
-}
-
-.checked {
-    background-color: green;
 }
 
 li {
@@ -89,8 +68,71 @@ input {
 
 input:focus {
     background: #fff;
-    border: 3px solid #006400;
+    border: 3px solid #90EE90;
     outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#toggle-form {
+    float: right;
+}
+
+#toggle-form:hover {
+    color: rgb(3, 31, 3) !important;
+}
+
+.check {
+    float: right;
+    background-color: #C0C0C0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.checked {
+    background-color: green;
+}
+
+.btn-custom {
+    padding: 5px 5px 5px 5px;
+    border-radius: 100px;
+}
+
+.posicaoButton {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-icon {
+    padding: 15px;
+    background: transparent;
+    color: white !important;
+}
+
+.remove-li-style {
+    height: unset !important;
+    line-height: unset !important;
+}
+
+.toggle-list {
+    text-decoration: none;
+}
+
+.toggle-list {
+    color: white;
+}
+
+.trash {
+    cursor: pointer;
 }
 
 #container {

@@ -1,0 +1,24 @@
+@model TodoAspNET.ViewModels.IndexViewModel 
+@{
+    ViewData["Title"] = "Login";
+}
+@section CSS
+{
+    <link rel="stylesheet" href="~/css/EstiloLogin.css" />
+}
+<div id="voc">
+    <h2>LOGIN</h2>
+
+   <form id = "Form" >
+        <label class = "dsa" for="Email"> Digite seu Email:</label>
+        <br />
+        <input type="text" id="Email" Email="Email">
+        <br />
+        <label class = "dsa" for="Senha">Digite a sua senha:</label>    
+        <br />
+        <input type="password" type="text" id="Senha" Senha="Senha">
+        <br />
+        <input  class = "bt-sub" type= "Submit" value="Entrar">
+    </form> 
+
+</div>   
