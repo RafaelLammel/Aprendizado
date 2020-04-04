@@ -1,4 +1,4 @@
-﻿@model TodoAspNET.ViewModels.IndexViewModel 
+﻿@model List<TodoAspNET.Models.Tarefa> 
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -23,7 +23,7 @@
 			<li class="remove-li-style">
 				<input id="descricao-tarefa" maxlength="25" placeholder="Digite aqui" onkeydown="createTask(event)"/>
 			</li>
-			@foreach (var item in Model.Tarefas)
+			@foreach (var item in Model)
 			{
 				<li id="tarefa-@(item.Id)">
 					<span><i class="fas fa-trash trash" onclick="deleteTask(@item.Id)"></i></span>

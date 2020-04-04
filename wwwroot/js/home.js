@@ -6,24 +6,21 @@ function createTask(e) {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            body: {
-                Id: undefined,
+            body: JSON.stringify({
                 Descricao: document.getElementById('descricao-tarefa').value,
-                Status: false,
-                IdLista: undefined,
-            }
+            })
         }).then(function(res) {
             res.json().then(function(json) {
 
                 let list = document.getElementById("collapseExample");
 
                 let element = `<li id="tarefa-${json.id}">
-        <span><i class="fas fa-trash trash" onclick="deleteTask(${json.id})"></i></span>
-        ${json.descricao}
-        <i id="tarefa-checked-@(item.Id)" class="fas fa-check check" onclick="changeStatus(${json.id})"></i>
-        </li>`
+                <span><i class="fas fa-trash trash" onclick="deleteTask(${json.id})"></i></span>
+                ${json.descricao}
+                <i id="tarefa-checked-@(item.Id)" class="fas fa-check check" onclick="changeStatus(${json.id})"></i>
+                </li>`
 
-                list.appendChild(element)
+                list.innerHTML = list.innerHTML + element;
 
             })
         })

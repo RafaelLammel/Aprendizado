@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TodoAspNET.Models;
 using TodoAspNET.Data;
-using TodoAspNET.ViewModels;
 
 namespace TodoAspNET.Controllers
 {
@@ -25,16 +24,12 @@ namespace TodoAspNET.Controllers
         public IActionResult Index()
         {
             var tarefas = _context.Tarefas.ToList();
-            
-            var listaTarefas = new IndexViewModel(){
-                Tarefas = tarefas
-            };
 
-            return View(listaTarefas);
+            return View(tarefas);
         }
         
         [HttpPost]
-        public IActionResult Index(Tarefa tarefa)
+        public IActionResult Index([FromBody] Tarefa tarefa)
         {
             tarefa.Status = false;
             _context.Tarefas.Add(tarefa);
