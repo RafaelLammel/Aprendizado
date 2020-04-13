@@ -54,7 +54,7 @@ public class ExercicioLista {
 
         //Verificando se a lista está vazia
         System.out.println(nomes.isEmpty());
-        
+
     }
 
 }
