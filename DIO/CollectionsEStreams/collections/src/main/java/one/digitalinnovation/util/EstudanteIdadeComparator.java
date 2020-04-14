@@ -1,4 +1,6 @@
-package one.digitalinnovation.comparator;
+package one.digitalinnovation.util;
+
+import one.digitalinnovation.util.Estudante;
 
 import java.util.Comparator;
 

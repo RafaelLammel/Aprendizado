@@ -1,5 +1,8 @@
 package one.digitalinnovation.comparator;
 
+import one.digitalinnovation.util.Estudante;
+import one.digitalinnovation.util.EstudanteIdadeComparator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package one.digitalinnovation.comparator;
+package one.digitalinnovation.util;
 
 public class Estudante implements Comparable<Estudante> {
 
