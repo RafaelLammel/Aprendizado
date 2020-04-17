@@ -8,8 +8,10 @@ import com.deal.bookapi.request.BookRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +20,17 @@ public class BookService {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
-    public List<Book> getBooks() {
+    public List<Book> getBooks(String orderBy) {
+        if(orderBy.equals("preco")) {
+            return bookRepository.findAll().stream()
+                    .sorted(Comparator.comparing(Book::getPrice))
+                    .collect(Collectors.toList());
+        }
+        if(orderBy.equals("paginas")) {
+            return bookRepository.findAll().stream()
+                    .sorted(Comparator.comparing(Book::getPages))
+                    .collect(Collectors.toList());
+        }
         return bookRepository.findAll();
     }
 

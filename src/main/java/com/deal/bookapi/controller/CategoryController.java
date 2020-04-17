@@ -17,8 +17,10 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/categorias")
-    public ResponseEntity<List<Category>> getCategories() {
-        return ResponseEntity.ok(categoryService.getCategories());
+    public ResponseEntity<List<Category>> getCategories(
+            @RequestParam(required = false, defaultValue = "", name = "ordenarPor") String orderBy
+    ) {
+        return ResponseEntity.ok(categoryService.getCategories(orderBy));
     }
 
     @GetMapping("/categorias/{id}")

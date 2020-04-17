@@ -5,8 +5,11 @@ import com.deal.bookapi.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,7 +17,12 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public List<Category> getCategories() {
+    public List<Category> getCategories(String orderBy) {
+        if(orderBy.equals("nome")) {
+            return categoryRepository.findAll().stream()
+                    .sorted(Comparator.comparing(Category::getName))
+                    .collect(Collectors.toList());
+        }
         return categoryRepository.findAll();
     }
 
