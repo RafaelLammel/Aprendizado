@@ -1,6 +1,9 @@
 package com.deal.bookapi.entity;
 
+import com.deal.bookapi.request.BookRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "livro")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -26,4 +30,10 @@ public class Book {
     @JoinColumn(name = "id_categoria")
     private Category category;
 
+    public Book(BookRequest bookRequest) {
+        this.name = bookRequest.getName();
+        this.price = bookRequest.getPrice();
+        this.pages = bookRequest.getPages();
+        this.code = bookRequest.getCode();
+    }
 }
