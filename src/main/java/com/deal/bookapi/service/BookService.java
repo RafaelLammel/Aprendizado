@@ -6,32 +6,35 @@ import com.deal.bookapi.repository.BookRepository;
 import com.deal.bookapi.repository.CategoryRepository;
 import com.deal.bookapi.request.BookRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BookService {
 
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
-    public List<Book> getBooks(String orderBy) {
-        if(orderBy.equals("preco")) {
-            return bookRepository.findAll().stream()
-                    .sorted(Comparator.comparing(Book::getPrice))
-                    .collect(Collectors.toList());
+    public Page<Book> getBooks(String orderBy, String page, String pageSize) {
+        Sort sort = Sort.unsorted();
+        switch (orderBy) {
+            case "preco":
+                sort = Sort.by("price");
+                break;
+            case "paginas":
+                sort = Sort.by("pages");
+                break;
         }
-        if(orderBy.equals("paginas")) {
-            return bookRepository.findAll().stream()
-                    .sorted(Comparator.comparing(Book::getPages))
-                    .collect(Collectors.toList());
-        }
-        return bookRepository.findAll();
+        Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(pageSize), sort);
+        return bookRepository.findAll(pageable);
     }
 
     public Optional<Book> getBook(int id) {
@@ -46,6 +49,7 @@ public class BookService {
             b.setCategory(category.get());
             return bookRepository.save(b);
         }
+        log.error("Cadastro de livro - Categoria "+ bookRequest.getId_category() +" não existe");
         return null;
     }
 
@@ -58,16 +62,20 @@ public class BookService {
                 b.setId(id);
                 return bookRepository.save(b);
             }
+            log.error("Modificação Livro - Categoria "+ bookRequest.getId_category() +" não existe");
             return null;
         }
+        log.error("Modificação Livro - Livro não existe");
         return null;
     }
 
     public boolean deleteBook(int id) {
         if(bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
+            log.info("Deletar Livro - Livro " + id + " excluído com sucesso");
             return true;
         }
+        log.error("Deletar Livro - Livro não existe");
         return false;
     }
 

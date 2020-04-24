@@ -3,6 +3,7 @@ package com.deal.bookapi.controller;
 import com.deal.bookapi.entity.Category;
 import com.deal.bookapi.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,12 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/categorias")
-    public ResponseEntity<List<Category>> getCategories(
-            @RequestParam(required = false, defaultValue = "", name = "ordenarPor") String orderBy
+    public ResponseEntity<Page<Category>> getCategories(
+            @RequestParam(required = false, defaultValue = "", name = "ordenarPor") String orderBy,
+            @RequestParam(required = false, defaultValue = "0") String page,
+            @RequestParam(required = false, defaultValue = "15") String pageSize
     ) {
-        return ResponseEntity.ok(categoryService.getCategories(orderBy));
+        return ResponseEntity.ok(categoryService.getCategories(orderBy, page, pageSize));
     }
 
     @GetMapping("/categorias/{id}")
