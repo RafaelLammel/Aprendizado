@@ -30,7 +30,10 @@
       <td>{{ course.code | lowercase | replace: '-' : ' ' }}</td>
       <td>{{ course.releaseDate | date: 'dd/MM/yyyy' }}</td>
       <td> <app-star [rating]="course.rating"></app-star> </td>
-      <td><a class="btn btn-primary" [routerLink]="['/courses/info', course.id]">Edit</a></td>
+      <td>
+        <a class="btn btn-primary mr-2" [routerLink]="['/courses/info', course.id]">Edit</a>
+        <button (click)="deleteById(course.id)" class="btn btn-danger">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
