@@ -7,14 +7,10 @@ import com.deal.bookapi.repository.CategoryRepository;
 import com.deal.bookapi.request.BookRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -23,18 +19,15 @@ public class BookService {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
-    public Page<Book> getBooks(String orderBy, String page, String pageSize) {
-        Sort sort = Sort.unsorted();
+    public List<Book> getBooks(String orderBy) {
         switch (orderBy) {
             case "preco":
-                sort = Sort.by("price");
-                break;
+                return bookRepository.findByOrderByPrice();
             case "paginas":
-                sort = Sort.by("pages");
-                break;
+                return bookRepository.findByOrderByPages();
+            default:
+                return bookRepository.findAll();
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(pageSize), sort);
-        return bookRepository.findAll(pageable);
     }
 
     public Optional<Book> getBook(int id) {

@@ -4,7 +4,6 @@ import com.deal.bookapi.entity.Book;
 import com.deal.bookapi.request.BookRequest;
 import com.deal.bookapi.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +18,10 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/livros")
-    public ResponseEntity<Page<Book>> getBooks(
-            @RequestParam(required = false, defaultValue = "", name = "ordenarPor") String orderBy,
-            @RequestParam(required = false, defaultValue = "0") String page,
-            @RequestParam(required = false, defaultValue = "15") String pageSize
+    public ResponseEntity<List<Book>> getBooks(
+            @RequestParam(required = false, defaultValue = "", name = "ordenarPor") String orderBy
     ) {
-        return ResponseEntity.ok(bookService.getBooks(orderBy, page, pageSize));
+        return ResponseEntity.ok(bookService.getBooks(orderBy));
     }
 
     @GetMapping("/livros/{id}")
