@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BookModule } from './book/book.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     BookModule,
     NoopAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    RouterModule.forRoot([
+      {
+        path: '', redirectTo: 'books', pathMatch: 'full'
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

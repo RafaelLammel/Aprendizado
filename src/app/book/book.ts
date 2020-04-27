@@ -1,5 +1,5 @@
-export interface Book {
-  id: number;
+export class Book {
+  id?: number;
   name: string;
   price: number;
   pages: number;

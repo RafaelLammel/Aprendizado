@@ -29,12 +29,13 @@ export class BookListComponent implements OnInit{
     this.paginator._intl.nextPageLabel = 'Próxima página';
     this.paginator._intl.previousPageLabel = 'Página anterior';
     this.paginator._intl.itemsPerPageLabel = 'Itens por página';
+    this.paginator.pageSize = 10;
     
     this.books.paginator = this.paginator;
   }
 
   index(): void {
-    this.bookService.index().subscribe({
+    this.bookService.findAll().subscribe({
       next: books => {
         this.books.data = books;
       },
@@ -42,6 +43,19 @@ export class BookListComponent implements OnInit{
         console.log('Error', err);
       }
     });
+  }
+
+  deleteById(id: number): void {
+    this.bookService.deleteById(id).subscribe({
+      next: res => {
+        console.log(id + " Excluido com sucesso!");
+        this.index();
+      },
+      error: err => {
+        console.log("Error ", err);
+      }
+    });
+
   }
 
 }
