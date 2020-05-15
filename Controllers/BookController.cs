@@ -4,7 +4,7 @@ using LivrariaDotnet.Data;
 using LivrariaDotnet.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using System;
+using System.Linq;
 
 namespace LivrariaDotnet.Controllers
 {
@@ -14,10 +14,18 @@ namespace LivrariaDotnet.Controllers
     {
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Book>>> Get([FromServices] DataContext context)
+        public async Task<ActionResult<List<Book>>> Get([FromServices] DataContext context, [FromQuery] string ordenarPor)
         {
-            var b = await context.Books.Include(x => x.Categoria).ToListAsync();
-            return Ok(b);
+            List<Book> b = await context.Books.Include(x => x.Categoria).ToListAsync();
+            switch(ordenarPor)
+            {
+                case "preco":
+                    return Ok(b.OrderBy(x => x.Preco));
+                case "paginas":
+                    return Ok(b.OrderBy(x => x.Paginas));
+                default:
+                    return Ok(b.OrderBy(x => x.Id));
+            }
         }
 
         [HttpGet]
