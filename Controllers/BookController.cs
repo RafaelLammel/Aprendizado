@@ -69,10 +69,10 @@ namespace LivrariaDotnet.Controllers
         [Route("{id:int}")]
         public async Task<ActionResult> Delete([FromServices] DataContext context, int id)
         {
-            var book = await context.Books.FirstOrDefaultAsync(x => x.Id == id);
-            if(book != null)
+            var b = await context.Books.FirstOrDefaultAsync(x => x.Id == id);
+            if(b != null)
             {
-                context.Remove(book);
+                context.Books.Remove(b);
                 await context.SaveChangesAsync();
                 return Ok();
             }
