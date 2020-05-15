@@ -4,20 +4,26 @@ using LivrariaDotnet.Data;
 using LivrariaDotnet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace LivrariaDotnet.Controllers
 {
     [ApiController]
     [Route("categoria")]
     public class CategoryController : ControllerBase
-    {
-        
+    {   
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context)
+        public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context, [FromQuery] string ordenarPor)
         {
-            var c = await context.Categories.ToListAsync();
-            return Ok(c);
+            List<Category> c = await context.Categories.ToListAsync();
+            switch(ordenarPor)
+            {
+                case "nome":
+                    return Ok(c.OrderBy(x => x.Nome));
+                default:
+                    return Ok(c.OrderBy(x => x.Id));
+            }
         }
 
         [HttpGet]
