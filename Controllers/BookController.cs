@@ -12,6 +12,9 @@ namespace LivrariaDotnet.Controllers
     [Route("livro")]
     public class BookController : ControllerBase
     {
+        /// <summary>
+        /// Retorna uma lista com todos os livros cadastrados 
+        /// </summary>
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<List<Book>>> Get([FromServices] DataContext context, [FromQuery] string ordenarPor)
@@ -28,6 +31,9 @@ namespace LivrariaDotnet.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna um livro com base no ID fornecido 
+        /// </summary>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<Book>> GetById([FromServices] DataContext context, int id)
@@ -42,6 +48,9 @@ namespace LivrariaDotnet.Controllers
             return BadRequest("Nenhum livro com este ID foi encontrado");
         }
 
+        /// <summary>
+        /// Cadastra um novo livro
+        /// </summary>
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<Book>> Post([FromServices] DataContext context, [FromBody] Book book)
@@ -55,6 +64,9 @@ namespace LivrariaDotnet.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Altera o livro com o ID fornecido
+        /// </summary>
         [HttpPut]
         [Route("{id:int}")]
         public async Task<ActionResult<Book>> Put([FromServices] DataContext context, [FromBody] Book book, int id)
@@ -73,6 +85,9 @@ namespace LivrariaDotnet.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Exclui o livro com o ID fornecido 
+        /// </summary>
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<ActionResult> Delete([FromServices] DataContext context, int id)

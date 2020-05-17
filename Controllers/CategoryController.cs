@@ -12,6 +12,9 @@ namespace LivrariaDotnet.Controllers
     [Route("categoria")]
     public class CategoryController : ControllerBase
     {   
+        /// <summary>
+        /// Retorna uma lista com todos as categiruas cadastradas 
+        /// </summary>
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context, [FromQuery] string ordenarPor)
@@ -26,6 +29,9 @@ namespace LivrariaDotnet.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna uma categoria com base no ID fornecido 
+        /// </summary>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<Category>> GetById([FromServices] DataContext context, int id)
@@ -38,6 +44,9 @@ namespace LivrariaDotnet.Controllers
             return BadRequest("Nenhuma categoria com este ID foi encontrado");
         }
 
+        /// <summary>
+        /// Cadastra uma nova categoria
+        /// </summary>
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<Category>> Post([FromServices] DataContext context, [FromBody] Category category)
@@ -51,6 +60,9 @@ namespace LivrariaDotnet.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Altera a categoria com o ID fornecido
+        /// </summary>
         [HttpPut]
         [Route("{id:int}")]
         public async Task<ActionResult<Category>> Put([FromServices] DataContext context, [FromBody] Category category, int id)
@@ -69,6 +81,9 @@ namespace LivrariaDotnet.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Exclui a categoria com o ID fornecido 
+        /// </summary>
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<ActionResult> Delete([FromServices] DataContext context, int id)
