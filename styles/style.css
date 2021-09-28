@@ -1,0 +1,145 @@
+body{
+  font-family: Arial;
+  background-color: green;
+  background: linear-gradient(to top left, #006600 26%, #0066ff 89%) fixed;
+}
+h3{
+  text-align: center;
+}
+input{
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 100%;
+}
+button{
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 100%;
+  background-color: darkgreen;
+  color:white;
+}
+textarea{
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 100%;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 3px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.content{
+  display: flex;
+  justify-content: center;
+}
+.container{
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(255,255,255,0.8);
+  padding: 15px;
+  border-radius: 5px;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+}
+.menu{
+  display: flex;
+  justify-content: center;
+}
+.menu ul li {
+  float: left;
+}
+.menu ul{
+  background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+  background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+  background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
+  padding: 1px;
+  border-radius: 10px;
+  list-style: none;
+  display: inline-table;
+  margin: 10px,0,0,0;
+  width: 700px;
+    display: flex;
+  justify-content: center;
+}
+.menu ul li:hover {
+  background: #4b545f;
+  background: linear-gradient(top, #4f5964 0%, #5f6975 40%);
+  background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%);
+  background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%);
+  border-radius: 10px;
+}
+.menu ul li a {
+  display: block; padding: 15px 63.9px;
+  color: black; text-decoration: none;
+}
+
+/*Código abaixo veio da W3Schools:
+https://www.w3schools.com/howto/howto_js_snackbar.asp*/
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
