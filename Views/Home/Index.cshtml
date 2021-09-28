@@ -1,0 +1,40 @@
+﻿@model List<TodoAspNET.Models.Tarefa> 
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section CSS
+{
+    <link rel="stylesheet" href="~/css/todo.css" />
+}
+
+<a href="#" class="btn btn-success btn-custom posicaoButton">
+<span class="fas fa-plus img-circle text-primary btn-icon"></span>
+
+</a>
+
+<div id= "container">
+
+	<div class="accordion" id="accordionExample">
+
+		<h1>To-Do Lists <span id="toggle-form"><a class="toggle-list" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-plus"></i></a></span></h1>
+		
+		<ul class="collapse show" id="collapseExample">
+			<li class="remove-li-style">
+				<input id="descricao-tarefa" maxlength="25" placeholder="Digite aqui" onkeydown="createTask(event)"/>
+			</li>
+			@foreach (var item in Model)
+			{
+				<li id="tarefa-@(item.Id)">
+					<span><i class="fas fa-trash trash" onclick="deleteTask(@item.Id)"></i></span>
+					@item.Descricao
+					<i id="tarefa-checked-@(item.Id)" class="fas fa-check check @(item.Status == true ? "checked" : "")" onclick="changeStatus(@item.Id)"></i>
+				</li>
+			}
+		</ul>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/home.js"></script>
+}
