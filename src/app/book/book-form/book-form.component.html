@@ -1,0 +1,43 @@
+<div class="content">
+  <form [formGroup]="form" (submit)="handleSubmit()">
+    <div class="field-container">
+      <mat-form-field class="spacing field">
+        <mat-label>Código</mat-label>
+        <input id="code" matInput type="number" formControlName="code">
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>Nome</mat-label>
+        <input id="name" matInput type="text" formControlName="name">
+      </mat-form-field>
+    </div>
+
+    <div class="field-container">
+      <mat-form-field class="spacing field">
+        <mat-label>Preço</mat-label>
+        <input id="price" matInput type="number" formControlName="price">
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>Número de páginas</mat-label>
+        <input id="pages" matInput type="number" formControlName="pages">
+      </mat-form-field>
+    </div>
+
+    <div class="field-container">
+    <mat-form-field class="field">
+      <mat-label>Categoria</mat-label>
+      <input id="category" matInput type="text" formControlName="category" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="setCategory">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-raised-button color="primary" [disabled]="!form.valid">Salvar</button>
+    </div>
+  </form>
+</div>
