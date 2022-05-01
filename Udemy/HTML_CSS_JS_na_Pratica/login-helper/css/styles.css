@@ -79,6 +79,7 @@ main form .password-container i {
     position: absolute;
     right: 8%;
     top: 35%;
+    color: black;
 }
 
 main form .password-container #eye {
